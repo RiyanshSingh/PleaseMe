@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PleaseMe</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- ROTATE OVERLAY (FOR MOBILE PORTRAIT) -->
+  <div id="rotateOverlay">
+    <div class="rotate-content">
+      <div class="rotate-icon">🔄</div>
+      <p>Please rotate your device to landscape for the best experience</p>
+    </div>
+  </div>
+
+<canvas id="bgCanvas"></canvas>
+<div id="curtain"></div>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <!-- LEFT ART PANEL -->
+  <div class="s1-left">
+    <!-- Background banner image 'homebanner.webp' is shown in CSS -->
+    <div class="s1-art-title">PleaseMe</div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="s1-right">
+    <div class="s1-brand">Your Secret Weapon</div>
+    <div class="s1-welcome">Fill this in. Let the magic happen</div>
+    <div class="s1-form">
+      <div class="field-group">
+        <div class="field-label">Your pick-up line</div>
+        <textarea id="line" rows="3" placeholder="Are you a magician? Because whenever I look at you, everyone else disappears."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">What do you want from her?</div>
+        <div class="toggle-row">
+          <div class="tog" id="t-insta" onclick="selectWant('insta',this)">📸 Instagram</div>
+          <div class="tog" id="t-snap" onclick="selectWant('snap',this)">👻 Snapchat</div>
+          <div class="tog" id="t-phone" onclick="selectWant('phone',this)">📱 Phone No.</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="launch()">Save & Launch</button>
+    </div>
+  </div>
+
+  <!-- PICKUP LIBRARY TRIGGER -->
+  <div class="pickup-trigger" onclick="toggleLibrary()" title="Pick-up Library">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18h6"></path>
+      <path d="M10 22h4"></path>
+      <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z"></path>
+    </svg>
+  </div>
+
+  <!-- PICKUP SIDEBAR -->
+  <div id="pickupSidebar" class="pickup-sidebar">
+    <div class="sidebar-header">
+      <h3>Library</h3>
+      <button class="close-sidebar" onclick="toggleLibrary()">✕</button>
+    </div>
+    
+    <div class="add-section">
+      <textarea id="newPickupInp" placeholder="Add your own charming line..."></textarea>
+      <button onclick="addPickup()">Add Note</button>
+    </div>
+
+    <div id="pickupList" class="pickup-list">
+      <!-- Pickups rendered here -->
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <div class="eyes-wrap" id="eyesWrap">
+    <div class="eye"><div class="pupil"></div></div>
+    <div class="eye"><div class="pupil"></div></div>
+  </div>
+  <div class="ticker-stage" id="tickerStage">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+  <div style="height:2.5rem"></div>
+  <div class="s2-after" id="s2After">
+    <div class="s2-question" id="s2q"></div>
+    <div class="s2-btns">
+      <button class="btn-yes" onclick="goS3()">Yes, sure! ❤️</button>
+      <button class="btn-no" id="noBtn" onclick="handleNo()">No, thanks</button>
+    </div>
+    <div class="no-msg" id="noMsg"></div>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <div class="dots">
+    <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div>
+  </div>
+  <div class="s3-card" id="s3card">
+    <span class="s3-icon" id="s3icon"></span>
+    <div class="s3-title" id="s3title"></div>
+    <div class="s3-sub" id="s3sub"></div>
+    <div class="field-group">
+      <div class="field-label" id="s3lbl"></div>
+      <input type="text" id="s3inp" placeholder=""/>
+    </div>
+    <button class="btn-primary" id="s3btn" onclick="submitDetails()">Send it</button>
+  </div>
+</div>
+
+<!-- SCREEN GIFT INTRO -->
+<div class="screen" id="s-gift">
+  <div class="typing-wrap">
+    <div id="giftText" class="typing-text"></div>
+  </div>
+</div>
+
+<!-- SCREEN SINGER CHOICE -->
+<div class="screen" id="s-singer">
+  <div class="s3-card">
+    <div class="s3-title">Who's your favorite singer? 🎤</div>
+    <div class="s3-sub">I have a little surprise based on your taste...</div>
+    <div class="singer-grid">
+      <button class="singer-btn" onclick="selectSinger('Arijit Singh')">Arijit Singh</button>
+      <button class="singer-btn" onclick="selectSinger('Shreya Ghoshal')">Shreya Ghoshal</button>
+      <button class="singer-btn" onclick="selectSinger('Diljit Dosanjh')">Diljit Dosanjh</button>
+      <button class="singer-btn" onclick="selectSinger('Jubin Nautiyal')">Jubin Nautiyal</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN FUNNY RESPONSE -->
+<div class="screen" id="s-funny">
+  <!-- Content removed to show full background GIF -->
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <audio id="bgSong" src="song.mp3"></audio>
+  <canvas id="confettiCanvas"></canvas>
+  <div class="finale-wrap" id="finaleWrap">
+    <div class="glow-ring"></div>
+    <div class="heart-beat">💖</div>
+    <div class="poem-text" id="poemEl"></div>
+    <button class="btn-restart" id="restartBtn" style="display:none" onclick="restart()">Start over 🔁</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
