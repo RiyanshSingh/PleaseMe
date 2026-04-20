@@ -395,13 +395,13 @@ textarea:focus,input:focus{
 }
 .pickup-card:hover{border-color:rgba(0,0,0,0.08);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.05)}
 .pickup-card p{
-  font-family:'Dancing Script',cursive;
-  font-size:1.4rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;
   color:#111;
-  line-height:1.4;
+  line-height:1.6;
   margin:0 0 1.2rem 0;
   font-weight:600;
-  letter-spacing:0.2px;
+  font-style:italic;
 }
 
 .card-actions{display:flex;justify-content:flex-end}
