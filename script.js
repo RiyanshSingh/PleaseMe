@@ -534,9 +534,13 @@ window.addEventListener('pointermove', (e) => {
     // Angle from eye center to cursor
     const angle = Math.atan2(e.clientY - y, e.clientX - x);
     
-    // Calculate distance from center, clamped to eye boundary
-    const maxDist = 90; // Scaled for 5x eyes
-    const dist = Math.min(maxDist, Math.hypot(e.clientX - x, e.clientY - y) / 6);
+    // Dynamically calculate boundaries based on responsive sizes
+    const pupil = eye.querySelector('.pupil');
+    const eyeRadius = rect.width / 2;
+    const pupilRadius = pupil.offsetWidth / 2;
+    const maxDist = eyeRadius - pupilRadius - 5; // 5px buffer
+    
+    const dist = Math.min(maxDist, Math.hypot(e.clientX - x, e.clientY - y) / 4);
     
     const px = Math.cos(angle) * dist;
     const py = Math.sin(angle) * dist;

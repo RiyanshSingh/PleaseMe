@@ -121,21 +121,21 @@ textarea:focus,input:focus{
   transition:opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
 }
 .eye{
-  width:375px;height:375px;background:#fff;border-radius:50%;
+  width:40vmin;height:40vmin;background:#fff;border-radius:50%;
   position:relative;display:flex;align-items:center;justify-content:center;
   box-shadow:inset 0 10px 30px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.04);
-  border:5px solid #f0f0f0;overflow:hidden;
+  border:3px solid #f0f0f0;overflow:hidden;
 }
 .pupil{
-  width:160px;height:160px;background:#111;border-radius:50%;
+  width:18vmin;height:18vmin;background:#111;border-radius:50%;
   position:relative;
   transform:translate(var(--px, 0), var(--py, 0));
   transition:transform 0.1s ease-out;
   box-shadow:0 0 30px rgba(0,0,0,0.2);
 }
 .pupil::after{
-  content:'';position:absolute;top:25px;left:25px;
-  width:40px;height:40px;background:#fff;border-radius:50%;opacity:0.3;
+  content:'';position:absolute;top:15%;left:15%;
+  width:25%;height:25%;background:#fff;border-radius:50%;opacity:0.3;
 }
 
 .ticker-stage{
